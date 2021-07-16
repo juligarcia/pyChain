@@ -1,0 +1,114 @@
+<!-- extend base layout -->
+{% extends "base.html" %}
+
+{% block content %}
+	<br>
+
+	<center>
+	<form action="/submit" id="textform" method="post">
+	    <textarea name="content" rows="4" cols="50" placeholder="Just write whatever you want to..."></textarea>
+	    <br>
+	    <input type="text" name="author" placeholder="Your name">
+	    <input type="submit" value="Post">
+	</form>
+	</center>
+
+	<br>
+
+	<a href="{{node_address}}/mine" target="_blank"><button>Request to mine</button></a>
+	<a href="/"><button>Resync</button></a>
+
+	<div class="box">
+    {% for post in posts %}
+    <div class="post_box">
+			<div class="post_box-header">
+				<div class="post_box-avatar">{{post.author[0]}}</div>
+				<div>
+					<div class="name-header">{{post.author}}</div>
+					<div class="post_box-subtitle"> Posted at <i>{{readable_time(post.timestamp)}}</i></div>
+				</div>
+
+			</div>
+
+				<div class="post_box-body">
+					<p>{{post.content}}</p>
+				</div>
+
+		</div>
+	{% endfor %}
+
+	<style>
+		.name-header {
+			text-transform: capitalize;
+		}
+		.post_box {
+		  background: #fff;
+			display: flex;
+		  padding: 12px 0px 0px 12px;
+		  margin-top: 0px;
+		  margin-bottom: 8px;
+		  border-top: 1px solid #f0f0f0;
+		}
+
+		.post_box-header {
+				align-items: center;
+				display: flex;
+				border-right: 1px solid lightgrey;
+				width: 15%;
+		}
+
+		.post_box-avatar {
+		    width: 35px;
+		    height: 35px;
+		    border-radius: 50%;
+		    display: flex;
+		    justify-content: center;
+		    align-items: center;
+		    color: white;
+		    font-size: 22px;
+		    float: left;
+		    margin-right: 16px;
+				text-transform: uppercase;
+				text-align: center;
+				background-color: lightgray;
+		}
+
+		.post_box-avatar::after {
+		    content:"";
+		    display:block;
+		}
+
+		.post_box-name {
+		    font-weight: bold;
+				text-transform: capitalize;
+		}
+
+		.post_box-subtitle {
+		    color: #777;
+		}
+
+		.post_box-body {
+		    align-items: center;
+				margin: 0 auto;
+				max-width: 50%;
+				white-space: normal;
+		}
+
+		.post_box-options {
+		    float: right;
+		}
+		.option-btn {
+		    background: #f8f8f8;
+		    border: none;
+		    color: #2c3e50;
+		    padding: 7px;
+		    cursor: pointer;
+		    font-size: 14px;
+		    margin-left: 2px;
+		    margin-right: 2px;
+		    outline: none;
+		    height: 42px;
+		}
+	</style>
+  </div>
+{% endblock %}
